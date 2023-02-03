@@ -1,0 +1,134 @@
+html {
+    margin: 0;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.l-b {
+    font-size: larger;
+    font-weight: bolder;
+}
+
+.cursive {
+    font-family: cursive;
+}
+
+.char-name {
+    color: rgb(189, 106, 4);
+}
+
+.yellow {
+    color: rgb(232, 232, 8);
+    letter-spacing: 2px;
+}
+
+.mono {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.name {
+    color: rgb(90, 147, 32);
+
+}
+
+.attempt {
+    background-color: #997a8d;
+    border: 2px solid black;
+    height: 30px;
+    width: 20vw;
+    margin: 10px;
+    color: white;
+}
+
+.round {
+    border-radius: 2%;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+
+.flex-container {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    padding: 5vw;
+    padding-right: 7vw;
+    justify-content: space-between;
+    gap: 10vw;
+    background-image: url('pics/cave.jpg');
+    background-size: cover;
+}
+
+.game-sec {
+    row-gap: 5vh;
+    align-items: center;
+}
+
+.text-sec {
+    max-width: 30rem;
+    color: white;
+    margin-left: 5px;
+    margin-top: 0;
+    font-size: 40px;
+    letter-spacing: 6px;
+    font-weight: bold;
+}
+
+.second {
+    font-family: Great Vibes;
+    font-size: 45px;
+    font-weight: lighter;
+    color: aqua;
+    letter-spacing: 3px;
+}
+
+.game-description {
+    color: #c4c3d0;
+    font-weight: bolder;
+    margin: 20px;
+    margin-left: 5px;
+
+}
+
+.room-info {
+    width: 35vw;
+    height: 40vh;
+    border: 1px solid black;
+    background-color: #c4c3d0;
+    padding: 15px;
+}
+
+.box-info {
+    padding-top: 2vh;
+    width: 30vw;
+    height: 15vh;
+    border: 1px solid black;
+    background-color: #979aaa;
+}
+
+.pop-up {
+    position: relative;
+    top: 25vh;
+    left: 22vw;
+    width: 30vw;
+    height: 25vh;
+    background-color: #777696;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+}
+
+.image {
+    position: absolute;
+    left: -2vw;
+    top: -23vh;
+    width: 9vw;
+    height: 25vh;
+    border-radius: 10%;
+    background-color: aqua;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+
+}
+
+.pop-up-text {
+    position: absolute;
+    margin: 3vh;
+}
