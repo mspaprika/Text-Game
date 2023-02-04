@@ -93,7 +93,6 @@ html {
 .room-info {
     width: 35vw;
     height: 40vh;
-    border: 1px solid black;
     background-color: #c4c3d0;
     padding: 15px;
 }
@@ -102,7 +101,6 @@ html {
     padding-top: 2vh;
     width: 30vw;
     height: 15vh;
-    border: 1px solid black;
     background-color: #979aaa;
 }
 
