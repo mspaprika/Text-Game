@@ -118,7 +118,6 @@ class UnluckyBox extends Box {
             return
         }
         this._quest["question"] = value;
-
     }
 
     set answer(value) {
@@ -127,7 +126,6 @@ class UnluckyBox extends Box {
             return
         }
         this._quest["answer"] = value;
-
     }
 }
   
@@ -260,7 +258,7 @@ class Character {
   Octopus.image = "pics/octo.jfif";
   const Snake = new Character("Sneaky Snake");
   Snake.description = "which is so fat that even its enormous length cannot compete its fatness";
-  Snake.conversation = "Don't be afraid of me. I'm just a snake. I used to be a rhino but contracted here under the pressure";
+  Snake.conversation = "Don't be afraid of me. I'm just a snake. I used to be a crocodile but contracted here under the pressure";
   Snake.image = "pics/snake.jpg";
   const Joe = new Character("Triple-Eyed Joe");
   Joe.description = "who is very handsome guy with sky-blue eyes. So what he's got 3 of them. Better more than less";
@@ -285,6 +283,7 @@ class Character {
 
   const LuckyBoxWhite = new Box("white");
   LuckyBoxWhite.description = "white box";
+
   const LuckyBoxBlack = new Box("black");
   LuckyBoxBlack.description = "black box";
 
@@ -406,6 +405,7 @@ const restart = () => {
   count = 0;
   currentState = 0;
   attempts = 3;
+  console.log("attemts set to 3");
   currentRoom = EntryCave;
   currentBox = null;
   textArea.innerHTML = "";
@@ -415,21 +415,20 @@ const restart = () => {
   textArea.style.fontSize = "1rem"
 }
 
+// function to display a funny message about the cave
 function displayRoomInfo(room) {
-  console.log(currentState);
-  console.log(currentRoom)
-    let occupantMsg = ""
+    console.log(currentRoom)
     boxQuestion.innerHTML = "";
-    
-    textContent = "<p>" + room.describe() + "</p>" + "<p>" +
-      occupantMsg + "</p>" ;
-      
+  
     nextRoom = "<p>" + room.getDetails() + "</p>";
 
+    // if no character then directions to next cave are displayed
     if (room.character === "") {
-      occupantMsg = ""
+
       textArea.innerHTML = nextRoom;
-      
+    
+    // if the character exists then the 'choose a box' message is displayed
+    // no host - no box  
     } else {
         currentCharacter = currentRoom._linkedObjects["character"];
         document.getElementById("image").src = currentCharacter.image;
@@ -445,14 +444,19 @@ function displayRoomInfo(room) {
     document.getElementById("usertext").focus();
 }
 
+// function that is called when the box is chosen
 function openBox(box) {
-   
+
+    // golden key means the box is Lucky. There's nothing inside it so next cave's directions are displayed
     if (currentBox._key == "Golden") {
       
         emptyText();
         boxQuestion.innerHTML = box.describe();
         popup.style.visibility = "hidden";
         textArea.innerHTML = "<p>" + currentRoom.getDetails() + "</p>";
+    
+    // if key is silver then the box is Unlucky and question is displayed
+    // state is changed to 1 
     } else {
         console.log(box);
         currentState = 1;
@@ -465,6 +469,7 @@ function openBox(box) {
 }
     
 function startGame() {
+
   document.getElementById("usertext").focus();
   currentRoom = EntryCave 
   currentBox = null
@@ -474,8 +479,11 @@ function startGame() {
   
   document.addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
-      
-      console.log("attempts" , attempts);
+
+      // printing variables/ part of the debugging process
+      console.log("attempts:" , attempts);
+      console.log("state:", currentState);
+      console.log("count:", count);
       command = document.getElementById("usertext").value;
       const directions = ["north", "south", "east", "west"]
 
@@ -485,19 +493,27 @@ function startGame() {
         console.log(currentRoom);
         currentRoom = currentRoom.move(command) 
         displayRoomInfo(currentRoom);
+
       } else if (command === "start") {
         displayRoomInfo(currentRoom) 
 
       } else if (command === "white") {
         currentBox = currentRoom._linkedObjects["box1"];
         openBox(currentBox);
+
       } else if (command === "black") {
         currentBox = currentRoom._linkedObjects["box2"];
         openBox(currentBox);
+
+        // check if answer is correct, if yes then directions of next cave is displayed
+        // if answer is correct the state is changed back to 0
       } else if (currentBox !== null && command == currentBox.answer) {
+
+        // winning condition is met and victory achieved
         if (currentRoom == QuantumCave) { victory(); return }
+
         popup.style.visibility = "hidden";
-        remaining.innerHTML = ""
+        remaining.innerHTML = "";
         remaining.style.visibility = "hidden";
         textArea.innerHTML = "<p>" + currentRoom.getDetails() + "</p>";
         emptyText();
@@ -507,21 +523,30 @@ function startGame() {
         attempts = 3;
         count = 0;
 
+        // this code kicks in when answering questions, after state is changed to 1
       } else if (count <= 3 && currentState == 1) {
-            
+        
+        // if third answer is incorrect then game over 
         if (count == 2) {
+          attempts = 3;
+          currentState = 0;
+          count = 0;
           gameOver();
+          return
         }
-        count++
-        attempts--
+        count++  
+        attempts--   
         remaining.innerHTML = `attempts remaining: ${attempts}`
 
       } else if (command === "restart") {
-        restart();
+        restart(); 
+        return
       } else if (command === "win") {
         victory();
+        return
       } else if (command === "lose") {
         gameOver();
+        return
       } else {
         alert("that is not a valid command please try again")
       }            
